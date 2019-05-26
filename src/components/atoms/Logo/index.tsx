@@ -1,23 +1,26 @@
 import * as React from "react";
-import { makeStyles } from "@material-ui/styles";
-import { Theme } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/styles";
+import { Theme } from "theme";
 import { Typography } from "@material-ui/core";
 
 interface Props {
-  className?: string;
+  color?: "primary" | "white" | "black";
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
+  root: (props: { color: string }) => ({
     letterSpacing: 4,
-    padding: 22
-  }
+    padding: 20,
+    color: props.color
+  })
 }));
 
-const Component = (props: Props) => {
-  const classes = useStyles();
+const Component = ({ color = "black", ...others }: Props) => {
+  const theme: Theme = useTheme();
+  const colors = { primary: theme.palette.primary.main, white: "white", black: "black" };
+  const classes = useStyles({ color: colors[color] });
   return (
-    <Typography variant="h2" color="primary" className={classes.root}>
+    <Typography variant="h2" {...others} className={classes.root}>
       SHOPMATE
     </Typography>
   );
