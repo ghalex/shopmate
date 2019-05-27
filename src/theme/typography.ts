@@ -41,7 +41,7 @@ const body2 = {
   lineHeight: 1.5
 };
 
-const typography = {
+const typography: any = {
   h1,
   h2,
   h3,

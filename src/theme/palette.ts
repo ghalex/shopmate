@@ -1,15 +1,18 @@
-import secondary from "@material-ui/core/colors/deepOrange";
-import { PaletteOptions } from "@material-ui/core/styles/createPalette";
+import secondary from "@material-ui/core/colors/blue";
 
-const pallet: PaletteOptions = {
+const palette: any = {
   primary: {
     main: "#F62F5E"
   },
   secondary,
+  white: {
+    color: "#F62F5E",
+    backgroundColor: "white"
+  },
   text: {
     primary: "#2e2e2e",
     secondary: "#6c6c6c"
   }
 };
 
-export default pallet;
+export default palette;
