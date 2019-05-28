@@ -5,16 +5,17 @@ import { TextField, InputAdornment, Icon } from "@material-ui/core";
 
 interface Props {
   className?: string;
+  variant: "white" | "black";
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
+  root: (props: Props) => ({
     width: 260,
     borderRadius: 18,
     padding: "3px 12px",
     margin: "0 8px",
-    backgroundColor: "rgba(255, 255, 255, 0.4)"
-  },
+    backgroundColor: props.variant === "white" ? "rgba(255, 255, 255, 0.4)" : "rgba(0, 0, 0, 0.4)"
+  }),
   field: {
     width: "100%",
     "& .MuiInputAdornment-root": {
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const Component = (props: Props) => {
-  const classes = useStyles();
+  const classes = useStyles({ variant: props.variant });
 
   return (
     <div className={classes.root}>

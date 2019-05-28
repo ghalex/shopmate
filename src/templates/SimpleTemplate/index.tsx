@@ -11,13 +11,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   content: {
     display: "flex",
     flexDirection: "column",
-    fontFamily: theme.typography.fontFamily,
     alignItems: "center",
-    justifyContent: "center",
-    flex: 1,
-    [theme.breakpoints.down("xs")]: {
-      justifyContent: "flex-start"
-    }
+    flex: 1
   }
 }));
 

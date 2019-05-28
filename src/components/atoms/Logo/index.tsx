@@ -1,4 +1,5 @@
 import * as React from "react";
+import cx from "classnames";
 import { makeStyles, useTheme } from "@material-ui/styles";
 import { Theme } from "theme";
 import { Typography } from "@material-ui/core";
@@ -20,7 +21,7 @@ const Component = ({ color = "black", ...others }: Props) => {
   const colors = { primary: theme.palette.primary.main, white: "white", black: "black" };
   const classes = useStyles({ color: colors[color] });
   return (
-    <Typography variant="h2" {...others} className={classes.root}>
+    <Typography variant="h2" {...others} className={cx("logo", classes.root)}>
       SHOPMATE
     </Typography>
   );

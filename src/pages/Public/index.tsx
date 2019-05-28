@@ -12,7 +12,9 @@ const PublicPage = (props: PageProps) => {
 
   return (
     <SimpleTemplate>
-      <Navigation />
+      <Navigation position="relative" />
+      <Navigation variant="black" position="relative" />
+      <Navigation variant="white" position="relative" />
       <Typography variant="h1">H1 Title here</Typography>
       <Typography variant="h2">Some subtitle using H2 font</Typography>
       <Typography variant="h3" color="textPrimary">
