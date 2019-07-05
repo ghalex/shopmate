@@ -3,6 +3,9 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const marked = require("marked");
 const renderer = new marked.Renderer();
+const { version } = require("./package.json");
+const env = require("dotenv-flow");
+env.config();
 
 const paths = {
   appBuild: path.resolve(__dirname, "build"),
@@ -17,8 +20,8 @@ module.exports = {
   entry: { main: paths.appIndex },
   output: {
     path: paths.appBuild,
-    filename: "bundle.js",
-    chunkFilename: "bundle.[name].js",
+    filename: `bundle.v${version}.js`,
+    chunkFilename: `bundle.[name].v${version}.js`,
     publicPath: "/"
   },
   devtool: false,
@@ -34,6 +37,7 @@ module.exports = {
       templates: path.resolve(path.join(__dirname, "src/templates")),
       types: path.resolve(path.join(__dirname, "src/types")),
       utils: path.resolve(path.join(__dirname, "src/utils")),
+      configs: path.resolve(path.join(__dirname, "src/configs")),
       "react-dom": "@hot-loader/react-dom"
     }
   },
@@ -63,7 +67,11 @@ module.exports = {
       }
     ]
   },
-  plugins: [new webpack.NamedModulesPlugin(), new HtmlWebpackPlugin({ template: paths.appHtml })],
+  plugins: [
+    new webpack.NamedModulesPlugin(),
+    new webpack.EnvironmentPlugin(["API_URL", "IMAGES_URL"]),
+    new HtmlWebpackPlugin({ template: paths.appHtml })
+  ],
   optimization: {
     splitChunks: {
       cacheGroups: {

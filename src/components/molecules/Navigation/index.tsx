@@ -10,11 +10,12 @@ import useStyles from "./styles";
 // Burger
 import Burger from "@animated-burgers/burger-squeeze";
 import "@animated-burgers/burger-squeeze/dist/styles.css";
-type Variant = "primary" | "white" | "black";
+
+export type NavigationVariant = "primary" | "white" | "black";
 
 interface Props extends AppBarProps {
   className?: string;
-  variant: Variant;
+  variant: NavigationVariant;
 }
 
 const Component = ({ variant, ...others }: Props) => {
@@ -25,7 +26,7 @@ const Component = ({ variant, ...others }: Props) => {
     white: { main: "white", over: "black", accent: primary },
     black: { main: "#2e2e2e", over: "white", accent: "white" }
   };
-  const classes = useStyles({ variant: variants[variant] });
+  const classes = useStyles({ variant: variants[variant] || variants.primary });
   const [open, setOpen] = React.useState(false);
 
   return (
