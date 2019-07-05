@@ -1,17 +1,23 @@
-import { createDomain } from "effector";
+import { createDomain, combine } from "effector";
 import { Product } from "models";
+import { Filter } from "types";
 import api from "api";
 
 const domain = createDomain("product");
 
-// effects
-const fetchProducts = domain.effect<any, Product[], any>("fetch products").use(args => {
-  return api.products.fetchProducts(args);
+// events & effects
+const changeFilter = domain.event<Filter>("filter");
+
+const fetchProducts = domain.effect<Filter, Product[], any>("fetch products").use(filter => {
+  return api.products.fetchProducts(filter);
 });
 
 // stores
-export const $all = domain.store<Product[]>([]);
-export const $busy = domain.store(false);
+const $all = domain.store<Product[]>([]);
+const $filter = domain.store<Filter>({ departmentId: -1, categoryId: -1, page: 1, limit: 7 });
+const $busy = domain.store(false);
+
+$filter.on(changeFilter, (state, payload) => payload).watch(newFilter => fetchProducts(newFilter));
 
 // prettier-ignore
 $all
@@ -27,5 +33,7 @@ $busy
 export default {
   $all,
   $busy,
-  fetchProducts
+  $filter,
+  fetchProducts,
+  changeFilter
 };

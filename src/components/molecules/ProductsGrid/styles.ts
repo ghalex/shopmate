@@ -13,9 +13,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down("xs")]: {
       gridTemplateColumns: "repeat(1, minmax(200px, 1fr))"
     }
-  },
-  filter: {
-    gridRow: "1 / 3"
   }
 }));
 

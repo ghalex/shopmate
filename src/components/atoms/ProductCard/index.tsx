@@ -2,8 +2,9 @@ import * as React from "react";
 import cx from "classnames";
 import useStyles from "./styles";
 import { Product } from "models";
-import { Typography } from "@material-ui/core";
+import { Typography, Button } from "@material-ui/core";
 import configs from "configs";
+import { Link } from "components";
 
 interface Props {
   className?: string;
@@ -16,17 +17,38 @@ const PorductCard = ({ data: product, ...rest }: Props) => {
 
   return (
     <div {...rest} className={className}>
-      <img
-        className={classes.image}
-        src={`${configs.imagesUrl}/products/${product.data.thumbnail}`}
-      />
-      <Typography variant="h3">{product.data.name}</Typography>
-      <Typography className={classes.price}>£{product.data.price}</Typography>
-      {product.hasDiscount && (
-        <Typography variant="h3" color="primary">
-          £{product.data.discounted_price}
+      <div>
+        <img className={classes.image} src={`${configs.imagesUrl}/products/${product.thumbnail}`} />
+        <Typography align="center" variant="h3">
+          {product.name}
         </Typography>
-      )}
+        <Typography className={classes.price}>£{product.price}</Typography>
+        {product.hasDiscount && (
+          <Typography variant="h3" color="primary">
+            £{product.discountedPrice}
+          </Typography>
+        )}
+      </div>
+      <div className={classes.overlay}>
+        <Typography variant="h2" align="center">
+          {product.name}
+        </Typography>
+        <div>
+          <Typography variant="h2" color="textSecondary" className={classes.price}>
+            £{product.price}
+          </Typography>
+          {product.hasDiscount && (
+            <Typography variant="h2" color="primary">
+              £{product.discountedPrice}
+            </Typography>
+          )}
+        </div>
+        <Link to={`/products/${product.id}`}>
+          <Button variant="contained" color="primary">
+            Quick view
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 };

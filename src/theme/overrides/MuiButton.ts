@@ -7,6 +7,7 @@ const root: CSSProperties = {
 const contained: CSSProperties = {
   boxShadow: "none",
   textTransform: "none",
+  textDecoration: "none",
   borderRadius: 24,
   padding: "12px 28px",
   fontFamily: "'Montserrat', serif",
@@ -16,7 +17,12 @@ const contained: CSSProperties = {
   }
 };
 
+const sizeSmall = {
+  padding: "4px 16px"
+};
+
 export default {
   root,
-  contained
+  contained,
+  sizeSmall
 };

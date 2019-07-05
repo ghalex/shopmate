@@ -10,3 +10,10 @@ export interface LoginData {
 export interface SignupData extends LoginData {
   retypePassword: string;
 }
+
+export interface Filter {
+  departmentId: number;
+  categoryId: number;
+  page?: number;
+  limit?: number;
+}
