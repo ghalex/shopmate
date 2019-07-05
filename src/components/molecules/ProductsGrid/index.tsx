@@ -14,7 +14,7 @@ const ProductsGrid = ({ products = [], ...rest }: Props) => {
   const className = cx(classes.root, rest.className);
 
   return (
-    <div {...rest} className={className}>
+    <div {...rest} data-cy="products-grid" className={className}>
       <div className={classes.filter}>filter</div>
       {products.map(product => {
         return <ProductCard key={product.id} data={product} />;

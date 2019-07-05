@@ -1,4 +1,24 @@
 # Shopmate
 
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-[![codebeat badge](https://codebeat.co/badges/a4e44e27-5b66-47dd-b534-a625c643586a)](https://codebeat.co/projects/github-com-ghalex-shopmate)
+[![Cypress.io tests](https://img.shields.io/badge/cypress.io-tests-green.svg)](https://cypress.io)
+[![codebeat badge](https://codebeat.co/badges/367a5b5f-a39e-4778-ac44-0030cbfa26d1)](https://codebeat.co/projects/github-com-ghalex-shopmate-master)
+
+## Demo:
+
+Shopmate live [here](https://ghalex-shopmate.netlify.com/).
+
+## Features:
+
+- [ ] List products
+- [ ] View product details
+- [ ] Shopping cart
+- [ ] Filter (by color, size, brand, etc.. )
+
+## Technologies used:
+
+- Typescript
+- React
+- [Cypress](https://github.com/cypress-io/cypress) for testing
+- [Effector](https://github.com/zerobias/effector) as store
+- [Material-ui](https://material-ui.com)
