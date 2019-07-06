@@ -17,7 +17,7 @@ const App = (props: {}) => {
       <CssBaseline />
       <Router>
         <RoutePublic path="/" exact={true} component={pages.Home} />
-        <RoutePrivate path="/private" exact={true} component={pages.Private} user={user} />
+        <RoutePublic path="/products/:id" exact={true} component={pages.Product} />
       </Router>
     </ThemeProvider>
   );

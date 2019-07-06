@@ -34,11 +34,11 @@ const PorductCard = ({ data: product, ...rest }: Props) => {
           {product.name}
         </Typography>
         <div>
-          <Typography variant="h2" color="textSecondary" className={classes.price}>
+          <Typography variant="h2" color="textSecondary" className={classes.price} align="center">
             £{product.price}
           </Typography>
           {product.hasDiscount && (
-            <Typography variant="h2" color="primary">
+            <Typography variant="h2" color="primary" align="center">
               £{product.discountedPrice}
             </Typography>
           )}

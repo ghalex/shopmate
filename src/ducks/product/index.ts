@@ -1,6 +1,7 @@
 import { createDomain, combine } from "effector";
 import { Product } from "models";
 import { Filter } from "types";
+import { defaults } from "lodash";
 import api from "api";
 
 const domain = createDomain("product");
@@ -8,9 +9,15 @@ const domain = createDomain("product");
 // events & effects
 const changeFilter = domain.event<Filter>("filter");
 
-const fetchProducts = domain.effect<Filter, Product[], any>("fetch products").use(filter => {
-  return api.products.fetchProducts(filter);
+const fetchProducts = domain.effect<Filter, Product[], any>("fetch all products").use(filter => {
+  return api.products.fetchAll(filter);
 });
+
+const fetchProductDetails = domain
+  .effect<number, Product, any>("fetch products details")
+  .use(id => {
+    return api.products.fetch({ id });
+  });
 
 // stores
 const $all = domain.store<Product[]>([]);
@@ -23,6 +30,14 @@ $filter.on(changeFilter, (state, payload) => payload).watch(newFilter => fetchPr
 $all
   .on(fetchProducts, () => [])
   .on(fetchProducts.done, (state, { result: all }) => all)
+  .on(fetchProductDetails.done, (state, { result: product }) => {
+    return state.map(p => {
+      if (p.id === product.id) {
+        return new Product(defaults(product.rawData, p.rawData))
+      }
+      return p
+    })
+  })
 
 $busy
   .on(fetchProducts, () => true)
@@ -35,5 +50,6 @@ export default {
   $busy,
   $filter,
   fetchProducts,
+  fetchProductDetails,
   changeFilter
 };

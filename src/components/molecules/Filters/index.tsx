@@ -34,9 +34,7 @@ const FiltersCompenent = ({
       </header>
       <div className={classes.content}>
         <div>
-          <Typography variant="h3" gutterBottom={true}>
-            Departments
-          </Typography>
+          <Typography variant="h3">Departments</Typography>
           {departments.length > 0 ? (
             <>
               <Button

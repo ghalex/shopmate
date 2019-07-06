@@ -4,6 +4,7 @@ import { Theme } from "@material-ui/core/styles";
 interface Props {
   hasDiscount?: boolean;
 }
+
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     position: "relative",

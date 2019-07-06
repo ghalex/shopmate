@@ -1,9 +1,9 @@
 import * as React from "react";
 import { useTheme } from "@material-ui/styles";
 import { Theme } from "@material-ui/core/styles";
-import { AppBar, Toolbar, Hidden, Link, Icon, IconButton, Badge } from "@material-ui/core";
+import { AppBar, Toolbar, Hidden, Icon, IconButton, Badge, Link } from "@material-ui/core";
 import { ShoppingCartOutlined } from "@material-ui/icons";
-import { Logo, SearchField } from "components";
+import { Link as LinkTo, Logo, SearchField } from "components";
 import { AppBarProps } from "@material-ui/core/AppBar";
 import useStyles from "./styles";
 
@@ -33,7 +33,9 @@ const Component = ({ variant, ...others }: Props) => {
     <AppBar className={classes.root} elevation={0} {...others}>
       <Toolbar>
         <div className={classes.brand}>
-          <Logo />
+          <LinkTo to="/">
+            <Logo />
+          </LinkTo>
         </div>
         <Hidden smUp={true} implementation="css">
           <Burger className={classes.burger} isOpen={open} onClick={() => setOpen(!open)} />

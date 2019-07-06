@@ -4,7 +4,6 @@ import { Theme } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     width: "100%",
-    maxWidth: theme.breakpoints.values.md,
     padding: theme.spacing(2),
     display: "grid",
     gridTemplateColumns: "repeat(3, minmax(200px, 1fr))",
