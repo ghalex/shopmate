@@ -10,10 +10,10 @@ Shopmate live [here](https://ghalex-shopmate.netlify.com/).
 
 ## Features:
 
-- [ ] List products
-- [ ] View product details
+- [x] List products
+- [x] View product details
 - [ ] Shopping cart
-- [ ] Filter (by color, size, brand, etc.. )
+- [x] Filter (by department, category, etc.. )
 
 ## Technologies used:
 
