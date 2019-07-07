@@ -17,6 +17,10 @@ const contained: CSSProperties = {
   }
 };
 
+const containedSecondary: CSSProperties = {
+  color: "#F62F5E"
+};
+
 const sizeSmall = {
   padding: "4px 16px"
 };
@@ -24,5 +28,6 @@ const sizeSmall = {
 export default {
   root,
   contained,
-  sizeSmall
+  sizeSmall,
+  containedSecondary
 };

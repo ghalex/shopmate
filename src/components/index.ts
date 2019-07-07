@@ -14,6 +14,7 @@ export { default as Quantity } from "./atoms/Quantity";
 //#region molecules
 export { default as Navigation } from "./molecules/Navigation";
 export { default as Filters } from "./molecules/Filters";
+export { default as ShoppingCartRow } from "./molecules/ShoppingCartRow";
 //#endregion
 
 //#region organisms

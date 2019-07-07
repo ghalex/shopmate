@@ -10,15 +10,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   btn: {
     boxShadow: "none",
-    width: 36,
+    width: 30,
     height: 30,
+    minHeight: 30,
     "& .material-icons": {
       fontSize: 16
     }
   },
   value: {
-    width: 42,
-    height: 36,
+    width: 44,
+    height: 30,
     border: "1px solid #CCC",
     borderRadius: 999,
     display: "flex",

@@ -14,14 +14,17 @@ const ProductPage = ({
     store: ducks.product.$all,
     keys: [id],
     fn: (products, [productId]) => {
+      console.log("map product", productId, products);
       return products.find(p => p.id === parseInt(productId, 10)) || null;
     }
   });
 
   React.useEffect(() => {
+    console.log("load product");
     ducks.product.fetchProductDetails(id);
   }, [id]);
 
+  console.log(product);
   return (
     <SimpleTemplate variant="black">
       <ProductDetails product={product} />

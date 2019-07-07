@@ -2,6 +2,7 @@ import { createDomain, combine } from "effector";
 import { Product } from "models";
 import { Filter } from "types";
 import { defaults } from "lodash";
+import produce from "immer";
 import api from "api";
 
 const domain = createDomain("product");
@@ -31,12 +32,15 @@ $all
   .on(fetchProducts, () => [])
   .on(fetchProducts.done, (state, { result: all }) => all)
   .on(fetchProductDetails.done, (state, { result: product }) => {
-    return state.map(p => {
-      if (p.id === product.id) {
-        return new Product(defaults(product.rawData, p.rawData))
+    const ndx = state.findIndex(x => x.id === product.id);
+
+    return produce(state, draft => {
+      if (ndx > -1) {
+        draft[ndx] = new Product(defaults(product.rawData, draft[ndx].rawData))
+      } else {
+        draft.push(product)
       }
-      return p
-    })
+    });
   })
 
 $busy
