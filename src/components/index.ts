@@ -19,4 +19,5 @@ export { default as Filters } from "./molecules/Filters";
 //#region organisms
 export { default as ProductDetails } from "./organisms/ProductDetails";
 export { default as ProductsGrid } from "./organisms/ProductsGrid";
+export { default as ShoppingCart } from "./organisms/ShoppingCart";
 //#endregion

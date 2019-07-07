@@ -10,8 +10,8 @@ const fetchCategories = domain.effect<void, Category[], any>("fetch categories")
 });
 
 // stores
-export const $all = domain.store<Category[]>([]);
-export const $busy = domain.store(false);
+const $all = domain.store<Category[]>([]);
+const $busy = domain.store(false);
 
 // prettier-ignore
 $all

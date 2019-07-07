@@ -22,6 +22,11 @@ const Component = ({ product, ...rest }: Props) => {
 
   const colors = product.attributes.filter(a => a.name === "Color").map(c => c.value);
   const sizes = product.attributes.filter(a => a.name === "Size").map(c => c.value);
+  const value = {
+    productId: product.id,
+    attributes: [colors[0], sizes[0]],
+    quantity: 1
+  };
 
   const images = [
     `${configs.imagesUrl}/products/${product.image}`,
@@ -58,22 +63,36 @@ const Component = ({ product, ...rest }: Props) => {
           <Typography variant="h3" color="textSecondary">
             Color:
           </Typography>
-          <Colors colors={colors} />
+          <Colors
+            colors={colors}
+            onChange={color => {
+              value.attributes[0] = color;
+            }}
+          />
         </div>
         <div className={classes.detailsRow}>
           <Typography variant="h3" color="textSecondary">
             Sizes:
           </Typography>
-          <Sizes sizes={sizes} />
+          <Sizes
+            sizes={sizes}
+            onChange={size => {
+              value.attributes[1] = size;
+            }}
+          />
         </div>
         <div className={classes.detailsRow}>
           <Typography variant="h3" color="textSecondary">
             Quantity:
           </Typography>
-          <Quantity />
+          <Quantity
+            onChange={q => {
+              value.quantity = q;
+            }}
+          />
         </div>
         <div className={classes.detailsRow}>
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" onClick={() => console.log(value)}>
             Add to cart
           </Button>
         </div>

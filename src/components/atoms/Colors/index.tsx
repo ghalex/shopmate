@@ -6,12 +6,20 @@ import useStyles from "./styles";
 interface Props {
   className?: string;
   colors: string[];
+  onChange?: (color: string) => void;
 }
 
-const Component = ({ colors, ...rest }: Props) => {
+const Component = ({ colors, onChange, ...rest }: Props) => {
   const classes = useStyles();
   const className = cx(classes.root, rest.className);
   const [selected, setSelected] = React.useState(0);
+
+  const handleChange = (idx: number) => {
+    if (onChange) {
+      onChange(colors[idx]);
+    }
+    setSelected(idx);
+  };
 
   return (
     <div {...rest} className={className}>
@@ -19,7 +27,7 @@ const Component = ({ colors, ...rest }: Props) => {
         return (
           <div
             key={idx}
-            onClick={() => setSelected(idx)}
+            onClick={() => handleChange(idx)}
             className={cx(classes.colorContainer, { [classes.selected]: idx === selected })}>
             <div className={classes.color} style={{ backgroundColor: color.toLowerCase() }} />
           </div>

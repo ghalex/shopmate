@@ -18,6 +18,7 @@ const App = (props: {}) => {
       <Router>
         <RoutePublic path="/" exact={true} component={pages.Home} />
         <RoutePublic path="/products/:id" exact={true} component={pages.Product} />
+        <RoutePublic path="/test" exact={true} component={pages.Test} />
       </Router>
     </ThemeProvider>
   );

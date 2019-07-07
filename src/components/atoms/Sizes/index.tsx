@@ -6,12 +6,20 @@ import useStyles from "./styles";
 interface Props {
   className?: string;
   sizes: string[];
+  onChange?: (size: string) => void;
 }
 
-const Component = ({ sizes, ...rest }: Props) => {
+const Component = ({ sizes, onChange, ...rest }: Props) => {
   const classes = useStyles();
   const className = cx(classes.root, rest.className);
-  const [selected, setSelected] = React.useState(2);
+  const [selected, setSelected] = React.useState(0);
+
+  const handleChange = (idx: number) => {
+    if (onChange) {
+      onChange(sizes[idx]);
+    }
+    setSelected(idx);
+  };
 
   return (
     <div {...rest} className={className}>
@@ -22,7 +30,7 @@ const Component = ({ sizes, ...rest }: Props) => {
             size="small"
             color={idx === selected ? "primary" : "default"}
             variant="contained"
-            onClick={() => setSelected(idx)}>
+            onClick={() => handleChange(idx)}>
             {size}
           </Button>
         );

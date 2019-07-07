@@ -17,3 +17,9 @@ export interface Filter {
   page?: number;
   limit?: number;
 }
+
+export interface CartAddProps {
+  cartId: string;
+  productId: number;
+  attributes: string;
+}

@@ -3,7 +3,10 @@ import { Theme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    display: "flex"
+    display: "flex",
+    [theme.breakpoints.down("xs")]: {
+      justifyContent: "center"
+    }
   },
   btn: {
     boxShadow: "none",

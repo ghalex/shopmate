@@ -12,12 +12,19 @@ const Component = ({ onChange, ...rest }: Props) => {
   const classes = useStyles();
   const className = cx(classes.root, rest.className);
   const [value, setValue] = React.useState(1);
+
   const add = () => {
     setValue(value + 1);
+    if (onChange) {
+      onChange(value + 1);
+    }
   };
   const remove = () => {
     if (value > 1) {
       setValue(value - 1);
+      if (onChange) {
+        onChange(value - 1);
+      }
     }
   };
   return (
