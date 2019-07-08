@@ -5,13 +5,14 @@ import useStyles from "./styles";
 
 interface Props {
   className?: string;
+  initialValue?: number;
   onChange?: (value: number) => void;
 }
 
-const Component = ({ onChange, ...rest }: Props) => {
+const Component = ({ initialValue = 1, onChange, ...rest }: Props) => {
   const classes = useStyles();
   const className = cx(classes.root, rest.className);
-  const [value, setValue] = React.useState(1);
+  const [value, setValue] = React.useState(initialValue);
 
   const add = () => {
     setValue(value + 1);

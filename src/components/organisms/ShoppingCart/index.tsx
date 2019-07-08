@@ -5,18 +5,28 @@ import { CartItem } from "models";
 import { ShoppingCartRow } from "components";
 import { Button, Typography, Box } from "@material-ui/core";
 
-interface Props {
+interface ShoppingCartProps {
   className?: string;
   items: CartItem[];
+  onQuantityChange: (item: number, value: number) => void;
+  onRemoveItem: (id: number) => void;
+  onCheckout?: () => void;
+  onClose?: () => void;
 }
 
-const Component = ({ items = [], ...rest }: Props) => {
+const ShoppingCart = ({
+  items = [],
+  onClose,
+  onRemoveItem,
+  onQuantityChange,
+  ...rest
+}: ShoppingCartProps) => {
   const classes = useStyles();
   const className = cx(classes.root, rest.className);
   return (
     <div className={className}>
       <header className={classes.header}>
-        <Typography variant="h2">4 items in your cart</Typography>
+        <Typography variant="h2">{items.length} items in your cart</Typography>
         <div className={classes.contentHeader}>
           <Box flex={1}>
             <Typography variant="h3" color="textSecondary">
@@ -37,11 +47,18 @@ const Component = ({ items = [], ...rest }: Props) => {
       </header>
       <div className={classes.content}>
         {items.map((item, idx) => {
-          return <ShoppingCartRow key={idx} />;
+          return (
+            <ShoppingCartRow
+              cartItem={item}
+              key={idx}
+              onRemove={onRemoveItem}
+              onQuantityChange={value => onQuantityChange(item.id, value)}
+            />
+          );
         })}
       </div>
       <div className={classes.footer}>
-        <Button variant="contained" color="secondary">
+        <Button variant="contained" color="secondary" onClick={onClose}>
           Back to Shop
         </Button>
         <Button variant="contained" color="primary">
@@ -52,4 +69,4 @@ const Component = ({ items = [], ...rest }: Props) => {
   );
 };
 
-export default Component;
+export default ShoppingCart;

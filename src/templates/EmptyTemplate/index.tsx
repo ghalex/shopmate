@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Navigation } from "components";
 import useStyles from "./styles";
 
 interface TemplateProps {

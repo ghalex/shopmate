@@ -1,7 +1,7 @@
 import * as React from "react";
 import { EmptyTemplate } from "templates";
-import { Button, Typography, Box } from "@material-ui/core";
-import { Logo, Navigation, ShoppingCartRow } from "components";
+import { Button, Typography } from "@material-ui/core";
+import { Logo, Navigation, ShoppingCartRow, Loading } from "components";
 
 import auth from "ducks/auth";
 
@@ -13,7 +13,9 @@ const PublicPage = (props: any) => {
       <Navigation position="relative" />
       <Navigation variant="black" position="relative" />
       <Navigation variant="white" position="relative" />
+      <Loading />
       <ShoppingCartRow />
+
       <Typography variant="h1">H1 Title here</Typography>
       <Typography variant="h2">Some subtitle using H2 font</Typography>
       <Typography variant="h3" color="textPrimary">

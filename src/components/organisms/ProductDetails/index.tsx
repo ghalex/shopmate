@@ -3,21 +3,28 @@ import cx from "classnames";
 import useStyles from "./styles";
 import { Product } from "models";
 import configs from "configs";
-import { Typography, Button } from "@material-ui/core";
-import { Colors, Sizes, Quantity } from "components";
+import { Typography, Button, Box } from "@material-ui/core";
+import { Colors, Sizes, Quantity, Loading } from "components";
 
 interface Props {
   className?: string;
   product: Product | null;
+  onAdd: (value: any) => void;
 }
 
-const Component = ({ product, ...rest }: Props) => {
+const Component = ({ product, onAdd, ...rest }: Props) => {
   const classes = useStyles({ hasDiscount: (product && product.hasDiscount) || false });
   const className = cx(classes.root, rest.className);
   const [selectedImage, selectImage] = React.useState(0);
 
-  if (!product) {
-    return <div className={className}>Loading</div>;
+  if (!product || product.attributes.length === 0) {
+    return (
+      <div className={className}>
+        <Box width="100%">
+          <Loading />
+        </Box>
+      </div>
+    );
   }
 
   const colors = product.attributes.filter(a => a.name === "Color").map(c => c.value);
@@ -92,7 +99,7 @@ const Component = ({ product, ...rest }: Props) => {
           />
         </div>
         <div className={classes.detailsRow}>
-          <Button variant="contained" color="primary" onClick={() => console.log(value)}>
+          <Button variant="contained" color="primary" onClick={() => onAdd(value)}>
             Add to cart
           </Button>
         </div>

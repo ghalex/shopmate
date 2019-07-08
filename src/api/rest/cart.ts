@@ -11,31 +11,29 @@ export const generateId = (): Promise<string> => {
     });
 };
 
-export const add = ({ cartId, productId, attributes }: CartAddProps): Promise<CartItem> => {
+export const add = ({ cartId, productId, attributes }: CartAddProps): Promise<CartItem[]> => {
   return api
     .url("shoppingcart/add")
     .post({ cart_id: cartId, product_id: productId, attributes })
     .json(res => {
-      return new CartItem(res[0]);
+      return res.map((i: any) => new CartItem(i));
     });
 };
 
-export const update = ({ itemId, quantity }: any): Promise<CartItem> => {
+export const update = ({ itemId, quantity }: any): Promise<CartItem[]> => {
   return api
     .url("shoppingcart/update/" + itemId)
     .put({ quantity })
     .json(res => {
-      return new CartItem(res[0]);
+      return res.map((i: any) => new CartItem(i));
     });
 };
 
-export const remove = ({ itemId }: any): Promise<string> => {
+export const remove = ({ itemId }: { itemId: number }): Promise<number> => {
   return api
     .url("shoppingcart/removeProduct/" + itemId)
     .delete()
-    .json(res => {
-      return itemId;
-    });
+    .res(_ => itemId);
 };
 
 export const fetchAll = ({ cartId }: { cartId: string }): Promise<CartItem[]> => {

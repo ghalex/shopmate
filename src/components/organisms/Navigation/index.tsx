@@ -16,9 +16,11 @@ export type NavigationVariant = "primary" | "white" | "black";
 interface Props extends AppBarProps {
   className?: string;
   variant: NavigationVariant;
+  nbOfCartItems: number;
+  onCartClick?: () => void;
 }
 
-const Component = ({ variant, ...others }: Props) => {
+const Component = ({ variant, nbOfCartItems = 0, onCartClick, ...others }: Props) => {
   const theme: Theme = useTheme();
   const primary = theme.palette.primary.main;
   const variants = {
@@ -28,7 +30,6 @@ const Component = ({ variant, ...others }: Props) => {
   };
   const classes = useStyles({ variant: variants[variant] || variants.primary });
   const [open, setOpen] = React.useState(false);
-  const [openCart, setOpenCart] = React.useState(false);
 
   return (
     <AppBar className={classes.root} elevation={0} {...others}>
@@ -48,16 +49,13 @@ const Component = ({ variant, ...others }: Props) => {
           <Hidden smDown={true} implementation="css">
             <SearchField variant={variant === "white" ? "black" : "white"} />
           </Hidden>
-          <IconButton color="inherit" onClick={() => setOpenCart(true)}>
-            <Badge badgeContent={4} classes={{ badge: classes.badge }}>
+          <IconButton color="inherit" onClick={onCartClick}>
+            <Badge badgeContent={nbOfCartItems} classes={{ badge: classes.badge }}>
               <ShoppingCartOutlined />
             </Badge>
           </IconButton>
         </div>
       </Toolbar>
-      <Dialog open={openCart} onClose={() => setOpenCart(false)} fullWidth={true} maxWidth="md">
-        <ShoppingCart items={[1, 2, 3]} />
-      </Dialog>
     </AppBar>
   );
 };
