@@ -16,10 +16,10 @@ const PorductCard = ({ data: product, ...rest }: Props) => {
   const className = cx(classes.root, rest.className);
 
   return (
-    <div {...rest} className={className}>
+    <div {...rest} className={className} data-cy="product">
       <div>
         <img className={classes.image} src={`${configs.imagesUrl}/products/${product.thumbnail}`} />
-        <Typography align="center" variant="h3">
+        <Typography data-cy="product-name" align="center" variant="h3">
           {product.name}
         </Typography>
         <Typography className={classes.price}>£{product.price}</Typography>
@@ -44,7 +44,7 @@ const PorductCard = ({ data: product, ...rest }: Props) => {
           )}
         </div>
         <Link to={`/products/${product.id}`}>
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" data-cy="product-view">
             Quick view
           </Button>
         </Link>

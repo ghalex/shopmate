@@ -32,7 +32,7 @@ const Component = ({ variant, nbOfCartItems = 0, onCartClick, ...others }: Props
   const [open, setOpen] = React.useState(false);
 
   return (
-    <AppBar className={classes.root} elevation={0} {...others}>
+    <AppBar className={classes.root} elevation={0} {...others} data-cy="navigation">
       <Toolbar>
         <div className={classes.brand}>
           <LinkTo to="/">
@@ -50,7 +50,10 @@ const Component = ({ variant, nbOfCartItems = 0, onCartClick, ...others }: Props
             <SearchField variant={variant === "white" ? "black" : "white"} />
           </Hidden>
           <IconButton color="inherit" onClick={onCartClick}>
-            <Badge badgeContent={nbOfCartItems} classes={{ badge: classes.badge }}>
+            <Badge
+              badgeContent={nbOfCartItems}
+              classes={{ badge: classes.badge }}
+              data-cy="cart-badge">
               <ShoppingCartOutlined />
             </Badge>
           </IconButton>

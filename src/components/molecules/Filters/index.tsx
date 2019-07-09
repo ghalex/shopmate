@@ -21,7 +21,7 @@ const FiltersCompenent = ({
   ...rest
 }: Props) => {
   const classes = useStyles();
-  const className = cx(classes.root, rest.className);
+  const className = cx(classes.root, rest.className, "filters");
 
   const filterCategory = (category: Category) => {
     return filter.departmentId > -1 && category.departmentId === filter.departmentId;
@@ -32,8 +32,8 @@ const FiltersCompenent = ({
       <header className={classes.header}>
         <Typography variant="h3">Filter 15 items</Typography>
       </header>
-      <div className={classes.content}>
-        <div>
+      <div className={cx(classes.content, "filters-department")}>
+        <div data-cy="filters-departments">
           <Typography variant="h3">Departments</Typography>
           {departments.length > 0 ? (
             <>
@@ -64,7 +64,7 @@ const FiltersCompenent = ({
           )}
         </div>
         {filter.departmentId > -1 && (
-          <div>
+          <div data-cy="filters-categories">
             <Typography variant="h3">Categories</Typography>
             <Button
               size="small"

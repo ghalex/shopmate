@@ -41,7 +41,7 @@ const Component = ({ product, onAdd, ...rest }: Props) => {
   ];
 
   return (
-    <div className={className}>
+    <div className={className} data-cy="product-details">
       <div className={classes.images}>
         {product.image && <img className={classes.imagesPreview} src={images[selectedImage]} />}
         <div className={classes.imagesList}>
@@ -62,7 +62,9 @@ const Component = ({ product, onAdd, ...rest }: Props) => {
         </div>
       </div>
       <div className={classes.details}>
-        <Typography variant="h2">{product.name}</Typography>
+        <Typography variant="h2" data-cy="product-name">
+          {product.name}
+        </Typography>
         <Typography variant="h2" color="primary">
           £{product.price}
         </Typography>
@@ -99,7 +101,11 @@ const Component = ({ product, onAdd, ...rest }: Props) => {
           />
         </div>
         <div className={classes.detailsRow}>
-          <Button variant="contained" color="primary" onClick={() => onAdd(value)}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => onAdd(value)}
+            data-cy="product-add">
             Add to cart
           </Button>
         </div>
