@@ -14,8 +14,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   dialog: {
     padding: "40px 16px",
-    maxWidth: 380,
-    margin: 8
+    maxWidth: "380px !important",
+    margin: "8px !important"
   },
   closeButton: {
     position: "absolute",
