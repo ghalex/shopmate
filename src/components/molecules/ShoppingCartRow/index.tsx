@@ -36,7 +36,7 @@ const Component = ({ cartItem, onRemove, onQuantityChange, ...rest }: Props) => 
           </Button>
         </div>
         <Box width={150} display="flex" alignItems="center" justifyContent="center">
-          <Quantity initialValue={cartItem.quantity} onChange={onQuantityChange} />
+          <Quantity value={cartItem.quantity} onChange={onQuantityChange} />
         </Box>
         <Box width={150} display="flex" alignItems="center" justifyContent="flex-end">
           <Typography variant="h2">£{cartItem.subtotal}</Typography>

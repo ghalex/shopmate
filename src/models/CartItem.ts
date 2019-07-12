@@ -13,7 +13,7 @@ export default class CartItem {
     this.id = data.item_id;
     this.name = data.name;
     this.attributes = data.attributes;
-    this.productId = data.productId;
+    this.productId = data.product_id;
     this.image = data.image;
     this.price = parseFloat(data.price);
     this.quantity = parseInt(data.quantity, 10);

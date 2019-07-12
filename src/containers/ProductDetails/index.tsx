@@ -7,6 +7,7 @@ import { Snackbar } from "@material-ui/core";
 const ProductDetailsContainer = ({ id }: { id: number }) => {
   const [open, setOpen] = React.useState(false);
   const cartId = useStore(ducks.cart.$id);
+  const cartItems = useStore(ducks.cart.$all);
   const product = useStoreMap({
     store: ducks.product.$all,
     keys: [id],
@@ -24,17 +25,27 @@ const ProductDetailsContainer = ({ id }: { id: number }) => {
   };
 
   const handleAdd = (value: any) => {
+    console.log(value);
     setOpen(false);
-    if (cartId) {
+    const item = cartItems.find(
+      i => i.productId === value.productId && i.attributes === value.attributes.join(", ")
+    );
+    if (cartId && !item) {
       ducks.cart
         .add({
           cartId,
           productId: value.productId,
-          attributes: value.attributes.join(", ")
+          attributes: value.attributes.join(", "),
+          quantity: value.quantity
         })
         .then(() => {
           setOpen(true);
         });
+    } else {
+      if (item) {
+        const quantity = item.quantity + value.quantity;
+        ducks.cart.update({ itemId: item.id, quantity });
+      }
     }
   };
 

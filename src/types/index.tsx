@@ -14,7 +14,8 @@ export interface SignupData extends LoginData {
 export interface Filter {
   departmentId: number;
   categoryId: number;
-  page?: number;
+  search: string;
+  page: number;
   limit?: number;
 }
 
@@ -22,4 +23,5 @@ export interface CartAddProps {
   cartId: string;
   productId: number;
   attributes: string;
+  quantity: number;
 }

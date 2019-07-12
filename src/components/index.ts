@@ -11,6 +11,7 @@ export { default as Colors } from "./atoms/Colors";
 export { default as Quantity } from "./atoms/Quantity";
 export { default as Loading } from "./atoms/Loading";
 export { default as SnackbarContent } from "./atoms/SnackbarContent";
+export { default as Pagination } from "./atoms/Pagination";
 //#endregion
 
 //#region molecules

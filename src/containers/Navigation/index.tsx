@@ -7,8 +7,15 @@ type Props = {} & Omit<Parameters<typeof Navigation>[0], "nbOfCartItems">;
 
 const NavigationContainer = (props: Props) => {
   const items = useStore(ducks.cart.$all);
+  const filter = useStore(ducks.product.$filter);
 
-  return <Navigation nbOfCartItems={items.length} {...props} />;
+  const handleSearch = (value: string) => {
+    if (value.length > 1 || value.length === 0) {
+      ducks.product.changeFilter({ ...filter, search: value });
+    }
+  };
+
+  return <Navigation nbOfCartItems={items.length} onSearch={handleSearch} {...props} />;
 };
 
 export default NavigationContainer;

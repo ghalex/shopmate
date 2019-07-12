@@ -16,6 +16,9 @@ const Component = ({ product, onAdd, ...rest }: Props) => {
   const classes = useStyles({ hasDiscount: (product && product.hasDiscount) || false });
   const className = cx(classes.root, rest.className);
   const [selectedImage, selectImage] = React.useState(0);
+  const [quantity, setQuantity] = React.useState(1);
+  const [color, setColor] = React.useState("White");
+  const [size, setSize] = React.useState("S");
 
   if (!product || product.attributes.length === 0) {
     return (
@@ -29,11 +32,6 @@ const Component = ({ product, onAdd, ...rest }: Props) => {
 
   const colors = product.attributes.filter(a => a.name === "Color").map(c => c.value);
   const sizes = product.attributes.filter(a => a.name === "Size").map(c => c.value);
-  const value = {
-    productId: product.id,
-    attributes: [colors[0], sizes[0]],
-    quantity: 1
-  };
 
   const images = [
     `${configs.imagesUrl}/products/${product.image}`,
@@ -72,39 +70,27 @@ const Component = ({ product, onAdd, ...rest }: Props) => {
           <Typography variant="h3" color="textSecondary">
             Color:
           </Typography>
-          <Colors
-            colors={colors}
-            onChange={color => {
-              value.attributes[0] = color;
-            }}
-          />
+          <Colors colors={colors} onChange={c => setColor(c)} />
         </div>
         <div className={classes.detailsRow}>
           <Typography variant="h3" color="textSecondary">
             Sizes:
           </Typography>
-          <Sizes
-            sizes={sizes}
-            onChange={size => {
-              value.attributes[1] = size;
-            }}
-          />
+          <Sizes sizes={sizes} onChange={s => setSize(s)} />
         </div>
         <div className={classes.detailsRow}>
           <Typography variant="h3" color="textSecondary">
             Quantity:
           </Typography>
-          <Quantity
-            onChange={q => {
-              value.quantity = q;
-            }}
-          />
+          <Quantity value={quantity} onChange={q => setQuantity(q)} />
         </div>
         <div className={classes.detailsRow}>
           <Button
             variant="contained"
             color="primary"
-            onClick={() => onAdd(value)}
+            onClick={() => {
+              onAdd({ productId: product.id, attributes: [color, size], quantity });
+            }}
             data-cy="product-add">
             Add to cart
           </Button>

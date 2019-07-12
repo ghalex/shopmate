@@ -10,9 +10,11 @@ const domain = createDomain("product");
 // events & effects
 const changeFilter = domain.event<Filter>("filter");
 
-const fetchProducts = domain.effect<Filter, Product[], any>("fetch all products").use(filter => {
-  return api.products.fetchAll(filter);
-});
+const fetchProducts = domain
+  .effect<Filter, { count: number; rows: Product[] }, any>("fetch all products")
+  .use(filter => {
+    return api.products.fetchAll(filter);
+  });
 
 const fetchProductDetails = domain
   .effect<number, Product, any>("fetch products details")
@@ -22,7 +24,14 @@ const fetchProductDetails = domain
 
 // stores
 const $all = domain.store<Product[]>([]);
-const $filter = domain.store<Filter>({ departmentId: -1, categoryId: -1, page: 1, limit: 7 });
+const $count = domain.store(0);
+const $filter = domain.store<Filter>({
+  departmentId: -1,
+  categoryId: -1,
+  page: 1,
+  limit: 7,
+  search: ""
+});
 const $busy = domain.store(false);
 
 $filter.on(changeFilter, (state, payload) => payload).watch(newFilter => fetchProducts(newFilter));
@@ -30,7 +39,9 @@ $filter.on(changeFilter, (state, payload) => payload).watch(newFilter => fetchPr
 // prettier-ignore
 $all
   .on(fetchProducts, () => [])
-  .on(fetchProducts.done, (state, { result: all }) => all)
+  .on(fetchProducts.done, (state, { result }) => {
+    return result.rows
+  })
   .on(fetchProductDetails.done, (state, { result: product }) => {
     const ndx = state.findIndex(x => x.id === product.id);
 
@@ -43,6 +54,8 @@ $all
     });
   })
 
+$count.on(fetchProducts, () => 0).on(fetchProducts.done, (state, { result }) => result.count);
+
 $busy
   .on(fetchProducts, () => true)
   .on(fetchProducts.done, () => false)
@@ -53,6 +66,7 @@ export default {
   $all,
   $busy,
   $filter,
+  $count,
   fetchProducts,
   fetchProductDetails,
   changeFilter

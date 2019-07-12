@@ -17,10 +17,19 @@ interface Props extends AppBarProps {
   className?: string;
   variant: NavigationVariant;
   nbOfCartItems: number;
+  hideSearch?: boolean;
   onCartClick?: () => void;
+  onSearch?: (value: string) => void;
 }
 
-const Component = ({ variant, nbOfCartItems = 0, onCartClick, ...others }: Props) => {
+const NavigationComponent = ({
+  variant,
+  nbOfCartItems = 0,
+  hideSearch = false,
+  onCartClick,
+  onSearch,
+  ...others
+}: Props) => {
   const theme: Theme = useTheme();
   const primary = theme.palette.primary.main;
   const variants = {
@@ -46,8 +55,11 @@ const Component = ({ variant, nbOfCartItems = 0, onCartClick, ...others }: Props
           <Link variant="h3">Women</Link>
           <Link variant="h3">Man</Link>
           <Link variant="h3">Kids</Link>
-          <Hidden smDown={true} implementation="css">
-            <SearchField variant={variant === "white" ? "black" : "white"} />
+          <Hidden mdUp={hideSearch} smDown={true} implementation="css">
+            <SearchField
+              variant={variant === "white" ? "black" : "white"}
+              onChange={value => (onSearch ? onSearch(value) : false)}
+            />
           </Hidden>
           <IconButton color="inherit" onClick={onCartClick}>
             <Badge
@@ -63,8 +75,8 @@ const Component = ({ variant, nbOfCartItems = 0, onCartClick, ...others }: Props
   );
 };
 
-Component.defaultProps = {
+NavigationComponent.defaultProps = {
   variant: "primary"
 };
 
-export default Component;
+export default NavigationComponent;

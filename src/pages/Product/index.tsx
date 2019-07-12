@@ -9,7 +9,7 @@ const ProductPage = ({
 }: any) => {
   const productId = parseInt(id, 10);
   return (
-    <SimpleTemplate variant="black">
+    <SimpleTemplate variant="black" hideSearch={true}>
       <ProductDetails id={productId} />
     </SimpleTemplate>
   );

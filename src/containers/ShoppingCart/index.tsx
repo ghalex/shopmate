@@ -4,7 +4,10 @@ import { Omit } from "utility-types";
 import { useStore } from "effector-react";
 import ducks from "ducks";
 
-type Props = {} & Omit<Parameters<typeof ShoppingCart>[0], "items">;
+// type Props = {} & Omit<Parameters<typeof ShoppingCart>[0], "items">;
+interface Props {
+  onClose: () => void;
+}
 
 const ShoppingCartContainer = (props: Props) => {
   const items = useStore(ducks.cart.$all);

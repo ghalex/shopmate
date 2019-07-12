@@ -1,7 +1,7 @@
 import { createDomain } from "effector";
 import { CartItem } from "models";
 import { CartAddProps } from "types";
-import { defaults } from "lodash";
+import { defaults, mergeWith } from "lodash";
 import api from "api";
 
 const domain = createDomain("cart");
@@ -19,6 +19,28 @@ const generateId = domain.effect<void, string, any>("generate id").use(async _ =
 });
 
 const add = domain.effect<CartAddProps, CartItem[], any>("add item to cart").use(props => {
+  if (props.quantity > 1) {
+    return api.cart.add(props).then(res => {
+      const item = res.find(
+        i => i.productId === props.productId && i.attributes === props.attributes
+      );
+
+      if (item) {
+        return api.cart
+          .update({ itemId: item.id, quantity: item.quantity + props.quantity - 1 })
+          .then(res2 => {
+            return mergeWith(res, res2, (a, b) => {
+              a.quantity = b.quantity;
+              a.subtotal = b.subtotal;
+              return a;
+            });
+          });
+      } else {
+        return res;
+      }
+    });
+  }
+
   return api.cart.add(props);
 });
 

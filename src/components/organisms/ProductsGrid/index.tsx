@@ -8,16 +8,18 @@ interface Props {
   className?: string;
   products?: Product[];
   filters?: JSX.Element;
+  showLoading?: boolean;
 }
 
-const ProductsGrid = ({ products = [], filters, ...rest }: Props) => {
+const ProductsGrid = ({ products = [], filters, showLoading = false, ...rest }: Props) => {
   const classes = useStyles();
   const className = cx(classes.root, rest.className);
   const skeletons = [0, 1, 2, 3];
+
   return (
     <div {...rest} data-cy="products-grid" className={className}>
       {filters}
-      {products.length > 0
+      {!showLoading
         ? products.map(product => {
             return <ProductCard key={product.id} data={product} />;
           })

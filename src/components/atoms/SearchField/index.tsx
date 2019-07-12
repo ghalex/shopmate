@@ -6,6 +6,7 @@ import { TextField, InputAdornment, Icon } from "@material-ui/core";
 interface Props {
   className?: string;
   variant: "white" | "black";
+  onChange?: (value: string) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -44,6 +45,7 @@ const Component = (props: Props) => {
             </InputAdornment>
           )
         }}
+        onChange={e => (props.onChange ? props.onChange(e.target.value) : null)}
       />
     </div>
   );
