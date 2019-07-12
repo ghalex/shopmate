@@ -11,7 +11,7 @@ const NavigationContainer = (props: Props) => {
 
   const handleSearch = (value: string) => {
     if (value.length > 1 || value.length === 0) {
-      ducks.product.changeFilter({ ...filter, search: value });
+      ducks.product.changeFilter({ ...filter, page: 1, search: value });
     }
   };
 
