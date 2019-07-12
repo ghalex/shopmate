@@ -10,12 +10,17 @@ const NavigationContainer = (props: Props) => {
   const filter = useStore(ducks.product.$filter);
 
   const handleSearch = (value: string) => {
-    if (value.length > 1 || value.length === 0) {
-      ducks.product.changeFilter({ ...filter, page: 1, search: value });
-    }
+    ducks.product.changeFilter({ ...filter, page: 1, search: value });
   };
 
-  return <Navigation nbOfCartItems={items.length} onSearch={handleSearch} {...props} />;
+  return (
+    <Navigation
+      nbOfCartItems={items.length}
+      searchValue={filter.search}
+      onSearch={handleSearch}
+      {...props}
+    />
+  );
 };
 
 export default NavigationContainer;

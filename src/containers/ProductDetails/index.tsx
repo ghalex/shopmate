@@ -5,7 +5,8 @@ import ducks from "ducks";
 import { Snackbar } from "@material-ui/core";
 
 const ProductDetailsContainer = ({ id }: { id: number }) => {
-  const [open, setOpen] = React.useState(false);
+  const [showSnackbar, setShowSnackbar] = React.useState(false);
+  const busy = useStore(ducks.cart.$busy);
   const cartId = useStore(ducks.cart.$id);
   const cartItems = useStore(ducks.cart.$all);
   const product = useStoreMap({
@@ -21,12 +22,11 @@ const ProductDetailsContainer = ({ id }: { id: number }) => {
   }, [id]);
 
   const handleClose = () => {
-    setOpen(false);
+    setShowSnackbar(false);
   };
 
   const handleAdd = (value: any) => {
-    console.log(value);
-    setOpen(false);
+    setShowSnackbar(false);
     const item = cartItems.find(
       i => i.productId === value.productId && i.attributes === value.attributes.join(", ")
     );
@@ -39,25 +39,27 @@ const ProductDetailsContainer = ({ id }: { id: number }) => {
           quantity: value.quantity
         })
         .then(() => {
-          setOpen(true);
+          setShowSnackbar(true);
         });
     } else {
       if (item) {
         const quantity = item.quantity + value.quantity;
-        ducks.cart.update({ itemId: item.id, quantity });
+        ducks.cart.update({ itemId: item.id, quantity }).then(() => {
+          setShowSnackbar(true);
+        });
       }
     }
   };
 
   return (
     <>
-      <ProductDetails onAdd={handleAdd} product={product} />
+      <ProductDetails onAdd={handleAdd} product={product} busy={busy} />
       <Snackbar
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "right"
         }}
-        open={open}
+        open={showSnackbar}
         autoHideDuration={6000}
         onClose={handleClose}>
         <SnackbarContent variant="success" message="Product added to cart." onClose={handleClose} />

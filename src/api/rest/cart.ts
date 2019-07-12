@@ -2,11 +2,14 @@ import api from "./api";
 import { CartItem } from "models";
 import { CartAddProps } from "types";
 
+export const id = localStorage.getItem("shopmate-cart-id");
+
 export const generateId = (): Promise<string> => {
   return api
     .url("shoppingcart/generateUniqueId")
     .get()
     .json(res => {
+      localStorage.setItem("shopmate-cart-id", res.cart_id);
       return res.cart_id;
     });
 };

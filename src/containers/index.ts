@@ -5,3 +5,4 @@ export { default as ShoppingCart } from "./ShoppingCart";
 export { default as ProductsGrid } from "./ProductsGrid";
 export { default as ProductsFilter } from "./ProductsFilter";
 export { default as Pagination } from "./Pagination";
+export { default as TopBar } from "./TopBar";

@@ -3,16 +3,17 @@ import cx from "classnames";
 import useStyles from "./styles";
 import { Product } from "models";
 import configs from "configs";
-import { Typography, Button, Box } from "@material-ui/core";
+import { Typography, Button, Box, CircularProgress } from "@material-ui/core";
 import { Colors, Sizes, Quantity, Loading } from "components";
 
 interface Props {
   className?: string;
   product: Product | null;
+  busy?: boolean;
   onAdd: (value: any) => void;
 }
 
-const Component = ({ product, onAdd, ...rest }: Props) => {
+const Component = ({ product, busy = false, onAdd, ...rest }: Props) => {
   const classes = useStyles({ hasDiscount: (product && product.hasDiscount) || false });
   const className = cx(classes.root, rest.className);
   const [selectedImage, selectImage] = React.useState(0);
@@ -88,11 +89,13 @@ const Component = ({ product, onAdd, ...rest }: Props) => {
           <Button
             variant="contained"
             color="primary"
+            style={{ width: 180 }}
             onClick={() => {
               onAdd({ productId: product.id, attributes: [color, size], quantity });
             }}
             data-cy="product-add">
-            Add to cart
+            {!busy && <span>Add to cart</span>}
+            {busy && <CircularProgress color="secondary" size={24} />}
           </Button>
         </div>
       </div>

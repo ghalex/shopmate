@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ShoppingCart, Navigation } from "containers";
+import { ShoppingCart, Navigation, TopBar } from "containers";
 import useStyles from "./styles";
 import { Dialog } from "@material-ui/core";
 
@@ -16,6 +16,7 @@ const SimpleTemplate = ({ children, variant = "primary", hideSearch, ...props }:
   return (
     <div {...props} className={classes.root}>
       <header className={classes.header}>
+        <TopBar />
         <Navigation
           variant={variant}
           position="relative"

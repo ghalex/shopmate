@@ -14,9 +14,15 @@ export { default as SnackbarContent } from "./atoms/SnackbarContent";
 export { default as Pagination } from "./atoms/Pagination";
 //#endregion
 
+//#region forms
+export { default as LoginForm } from "./forms/LoginForm";
+export { default as SignupForm } from "./forms/SignupForm";
+//#endregion
+
 //#region molecules
 export { default as Filters } from "./molecules/Filters";
 export { default as ShoppingCartRow } from "./molecules/ShoppingCartRow";
+export { default as TopBar } from "./molecules/TopBar";
 //#endregion
 
 //#region organisms

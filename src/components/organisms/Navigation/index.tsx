@@ -18,6 +18,7 @@ interface Props extends AppBarProps {
   variant: NavigationVariant;
   nbOfCartItems: number;
   hideSearch?: boolean;
+  searchValue?: string;
   onCartClick?: () => void;
   onSearch?: (value: string) => void;
 }
@@ -26,6 +27,7 @@ const NavigationComponent = ({
   variant,
   nbOfCartItems = 0,
   hideSearch = false,
+  searchValue = "",
   onCartClick,
   onSearch,
   ...others
@@ -58,6 +60,7 @@ const NavigationComponent = ({
           <Hidden mdUp={hideSearch} smDown={true} implementation="css">
             <SearchField
               variant={variant === "white" ? "black" : "white"}
+              value={searchValue}
               onChange={value => (onSearch ? onSearch(value) : false)}
             />
           </Hidden>

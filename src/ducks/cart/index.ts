@@ -5,17 +5,14 @@ import { defaults, mergeWith } from "lodash";
 import api from "api";
 
 const domain = createDomain("cart");
-const storedCartId = localStorage.getItem("shopmate-cart-id") || null;
 
 // effects
 const fetchAll = domain.effect<string, CartItem[], any>("fech all").use(cartId => {
   return api.cart.fetchAll({ cartId });
 });
 
-const generateId = domain.effect<void, string, any>("generate id").use(async _ => {
-  const id = await api.cart.generateId();
-  localStorage.setItem("shopmate-cart-id", id);
-  return id;
+const generateId = domain.effect<void, string, any>("generate id").use(_ => {
+  return api.cart.generateId();
 });
 
 const add = domain.effect<CartAddProps, CartItem[], any>("add item to cart").use(props => {
@@ -55,8 +52,10 @@ const remove = domain.effect<number, number, any>("remove item from cart").use(i
 });
 
 // stores
-const $id = domain.store<string | null>(storedCartId, { name: "id" });
+const $id = domain.store<string | null>(api.cart.id, { name: "id" });
 const $all = domain.store<CartItem[]>([], { name: "all" });
+const $busy = domain.store(false);
+const $total = $all.map(all => all.reduce((total, i) => total + i.subtotal, 0));
 
 // reducers
 $id.on(generateId.done, (_, { result: id }) => id);
@@ -82,6 +81,17 @@ $id.watch(id => {
   }
 });
 
+$busy
+  .on(fetchAll, () => true)
+  .on(fetchAll.done, () => false)
+  .on(fetchAll.fail, () => false)
+  .on(add, () => true)
+  .on(add.done, () => false)
+  .on(add.fail, () => false)
+  .on(update, () => true)
+  .on(update.done, () => false)
+  .on(update.fail, () => false);
+
 domain.onCreateStore(store => {
   if (store.shortName === "id" && store.getState() === null) {
     generateId();
@@ -92,6 +102,8 @@ domain.onCreateStore(store => {
 export default {
   $id,
   $all,
+  $busy,
+  $total,
   generateId,
   fetchAll,
   add,

@@ -25,6 +25,15 @@ const h3 = {
   color: "#2e2e2e"
 };
 
+const h4 = {
+  fontFamily: "'Montserrat', serif",
+  fontWeight: "bold",
+  fontStyle: "normal",
+  fontSize: 14,
+  lineHeight: 1.5,
+  color: "#2e2e2e"
+};
+
 const body1 = {
   fontFamily: "'Open Sans', serif",
   fontWeight: 300,
@@ -45,6 +54,7 @@ const typography: any = {
   h1,
   h2,
   h3,
+  h4,
   body1,
   body2
 };

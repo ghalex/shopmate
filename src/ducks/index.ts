@@ -1,11 +1,11 @@
-import auth from "./auth";
+import customer from "./customer";
 import product from "./product";
 import category from "./category";
 import department from "./department";
 import cart from "./cart";
 
 export default {
-  auth,
+  customer,
   product,
   category,
   department,

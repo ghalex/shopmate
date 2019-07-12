@@ -8,6 +8,7 @@ export interface LoginData {
 }
 
 export interface SignupData extends LoginData {
+  name: string;
   retypePassword: string;
 }
 

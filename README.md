@@ -16,6 +16,10 @@ Shopmate live [here](https://ghalex-shopmate.netlify.com/).
 - [x] View product details
 - [x] Shopping cart
 - [x] Filter (by department, category, etc.. )
+- [x] Search product
+- [x] Login
+- [x] Signup
+- [x] Pagination
 
 ## Technologies used:
 
