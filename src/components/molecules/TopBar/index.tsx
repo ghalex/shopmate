@@ -1,16 +1,8 @@
 import * as React from "react";
 import cx from "classnames";
 import useStyles from "./styles";
-import {
-  Link,
-  Typography,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  IconButton,
-  Icon
-} from "@material-ui/core";
-import { LoginForm, SignupForm } from "components";
+import { Link, Typography } from "@material-ui/core";
+import { LoginForm, SignupForm, DialogForm } from "components";
 import { LoginData, SignupData } from "types";
 import { User } from "models";
 
@@ -54,62 +46,26 @@ const TopBarComponent = ({
           Your bag: <b>£{Math.round(total * 100) / 100}</b>
         </Typography>
       </div>
-      <Dialog classes={{ paper: classes.dialog }} open={dialog === 1} onClose={() => setDialog(0)}>
-        <DialogTitle>
-          <Typography variant="h2" align="center" component="div">
-            Sign In
-          </Typography>
-          {error && (
-            <Typography align="center" className={classes.danger}>
-              {error}
-            </Typography>
-          )}
-          <IconButton
-            aria-label="Close"
-            onClick={() => setDialog(0)}
-            className={classes.closeButton}>
-            <Icon>close</Icon>
-          </IconButton>
-        </DialogTitle>
-        <DialogContent>
-          <LoginForm
-            onSubmit={data =>
-              onLogin(data).then(res => {
-                setDialog(0);
-                return res;
-              })
-            }
-          />
-        </DialogContent>
-      </Dialog>
-      <Dialog classes={{ paper: classes.dialog }} open={dialog === 2} onClose={() => setDialog(0)}>
-        <DialogTitle>
-          <Typography variant="h2" align="center" component="div">
-            Sign Up
-          </Typography>
-          {error && (
-            <Typography align="center" className={classes.danger}>
-              {error}
-            </Typography>
-          )}
-          <IconButton
-            aria-label="Close"
-            onClick={() => setDialog(0)}
-            className={classes.closeButton}>
-            <Icon>close</Icon>
-          </IconButton>
-        </DialogTitle>
-        <DialogContent>
-          <SignupForm
-            onSubmit={data =>
-              onSignup(data).then(res => {
-                setDialog(0);
-                return res;
-              })
-            }
-          />
-        </DialogContent>
-      </Dialog>
+      <DialogForm title="Sign In" open={dialog === 1} onClose={() => setDialog(0)}>
+        <LoginForm
+          onSubmit={data =>
+            onLogin(data).then(res => {
+              setDialog(0);
+              return res;
+            })
+          }
+        />
+      </DialogForm>
+      <DialogForm title="Sign Up" open={dialog === 2} onClose={() => setDialog(0)}>
+        <SignupForm
+          onSubmit={data =>
+            onSignup(data).then(res => {
+              setDialog(0);
+              return res;
+            })
+          }
+        />
+      </DialogForm>
     </div>
   );
 };

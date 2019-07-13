@@ -16,29 +16,25 @@ const generateId = domain.effect<void, string, any>("generate id").use(_ => {
 });
 
 const add = domain.effect<CartAddProps, CartItem[], any>("add item to cart").use(props => {
-  if (props.quantity > 1) {
-    return api.cart.add(props).then(res => {
-      const item = res.find(
-        i => i.productId === props.productId && i.attributes === props.attributes
-      );
+  return api.cart.add(props).then(res => {
+    const item = res.find(
+      i => i.productId === props.productId && i.attributes === props.attributes
+    );
 
-      if (item) {
-        return api.cart
-          .update({ itemId: item.id, quantity: item.quantity + props.quantity - 1 })
-          .then(res2 => {
-            return mergeWith(res, res2, (a, b) => {
-              a.quantity = b.quantity;
-              a.subtotal = b.subtotal;
-              return a;
-            });
+    if (item && props.quantity > 1) {
+      return api.cart
+        .update({ itemId: item.id, quantity: item.quantity + props.quantity - 1 })
+        .then(res2 => {
+          return mergeWith(res, res2, (a, b) => {
+            a.quantity = b.quantity;
+            a.subtotal = b.subtotal;
+            return a;
           });
-      } else {
-        return res;
-      }
-    });
-  }
-
-  return api.cart.add(props);
+        });
+    } else {
+      return res;
+    }
+  });
 });
 
 const update = domain

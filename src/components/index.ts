@@ -12,6 +12,7 @@ export { default as Quantity } from "./atoms/Quantity";
 export { default as Loading } from "./atoms/Loading";
 export { default as SnackbarContent } from "./atoms/SnackbarContent";
 export { default as Pagination } from "./atoms/Pagination";
+export { default as DialogForm } from "./atoms/DialogForm";
 //#endregion
 
 //#region forms

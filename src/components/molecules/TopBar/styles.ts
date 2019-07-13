@@ -11,20 +11,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     "& a": {
       cursor: "pointer"
     }
-  },
-  dialog: {
-    padding: "40px 16px",
-    maxWidth: "380px !important",
-    margin: "8px !important"
-  },
-  closeButton: {
-    position: "absolute",
-    right: theme.spacing(1),
-    top: theme.spacing(1),
-    color: theme.palette.grey[500]
-  },
-  danger: {
-    color: "red"
   }
 }));
 
