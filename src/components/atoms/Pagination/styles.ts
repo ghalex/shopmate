@@ -10,7 +10,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     boxShadow: "0 1px 1px 0 rgba(0, 0, 0, 0.2)",
     fontWeight: "bold",
     color: "#888",
-    cursor: "pointer"
+    cursor: "pointer",
+    alignSelf: "center"
   }
 }));
 
