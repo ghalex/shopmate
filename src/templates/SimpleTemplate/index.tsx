@@ -2,6 +2,7 @@ import * as React from "react";
 import { ShoppingCart, Navigation, TopBar } from "containers";
 import useStyles from "./styles";
 import { Dialog } from "@material-ui/core";
+import { Footer } from "components";
 
 interface TemplateProps {
   children: JSX.Element | JSX.Element[] | string;
@@ -28,6 +29,7 @@ const SimpleTemplate = ({ children, variant = "primary", hideSearch, ...props }:
         </Dialog>
       </header>
       <main className={classes.content}>{children}</main>
+      <Footer />
     </div>
   );
 };

@@ -8,7 +8,7 @@ interface Props {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: "flex",
-    width: "100%",
+    flex: 1,
     minHeight: 500,
     padding: theme.spacing(2),
     margin: theme.spacing(2),

@@ -31,4 +31,5 @@ export { default as Navigation } from "./organisms/Navigation";
 export { default as ProductDetails } from "./organisms/ProductDetails";
 export { default as ProductsGrid } from "./organisms/ProductsGrid";
 export { default as ShoppingCart } from "./organisms/ShoppingCart";
+export { default as Footer } from "./organisms/Footer";
 //#endregion

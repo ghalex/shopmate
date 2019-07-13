@@ -18,7 +18,6 @@ export default makeStyles((theme: Theme) => ({
   content: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
     width: "100%",
     flex: 1,
     maxWidth: theme.breakpoints.values.md
