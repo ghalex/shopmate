@@ -14,6 +14,7 @@ interface Props {
   onLogin: (data: LoginData) => Promise<any>;
   onSignup: (data: SignupData) => Promise<any>;
   onLogout: () => void;
+  onClearError: () => void;
 }
 
 const TopBarComponent = ({
@@ -23,6 +24,7 @@ const TopBarComponent = ({
   onLogin,
   onSignup,
   onLogout,
+  onClearError,
   ...rest
 }: Props) => {
   const classes = useStyles();
@@ -39,14 +41,19 @@ const TopBarComponent = ({
           </Typography>
         ) : (
           <Typography variant="h4">
-            Hi <Link onClick={onLogout}>{user.name}!</Link>
+            Hi <Link onClick={onLogout}>{user.name}!, logout</Link>
           </Typography>
         )}
         <Typography variant="h4">
           Your bag: <b>£{Math.round(total * 100) / 100}</b>
         </Typography>
       </div>
-      <DialogForm title="Sign In" open={dialog === 1} onClose={() => setDialog(0)}>
+      <DialogForm
+        title="Sign In"
+        error={error}
+        open={dialog === 1}
+        onClose={() => setDialog(0)}
+        onEnter={onClearError}>
         <LoginForm
           onSubmit={data =>
             onLogin(data).then(res => {
@@ -56,7 +63,12 @@ const TopBarComponent = ({
           }
         />
       </DialogForm>
-      <DialogForm title="Sign Up" open={dialog === 2} onClose={() => setDialog(0)}>
+      <DialogForm
+        title="Sign Up"
+        error={error}
+        open={dialog === 2}
+        onClose={() => setDialog(0)}
+        onEnter={onClearError}>
         <SignupForm
           onSubmit={data =>
             onSignup(data).then(res => {

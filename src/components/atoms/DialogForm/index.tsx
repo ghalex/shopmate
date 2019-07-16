@@ -13,19 +13,25 @@ import {
 
 interface Props {
   className?: string;
-  error?: string;
+  error?: string | null;
   open: boolean;
   title: string;
-  onClose: () => void;
   children: JSX.Element | JSX.Element[];
+  onClose: () => void;
+  onEnter: () => void;
 }
 
-const Component = ({ open, error, children, title, onClose, ...rest }: Props) => {
+const Component = ({ open, error, children, title, onEnter, onClose, ...rest }: Props) => {
   const classes = useStyles();
   const className = cx(classes.root, rest.className);
 
   return (
-    <Dialog open={open} onClose={onClose} className={className} classes={pick(classes, "paper")}>
+    <Dialog
+      open={open}
+      onEnter={onEnter}
+      onClose={onClose}
+      className={className}
+      classes={pick(classes, "paper")}>
       <DialogTitle>
         <Typography variant="h2" align="center" component="div">
           {title}

@@ -23,6 +23,7 @@ const TopBarContainer = (props: any) => {
           onLogin={ducks.customer.login}
           onSignup={ducks.customer.signup}
           onLogout={() => ducks.customer.logout()}
+          onClearError={() => ducks.customer.clearError()}
         />
       )}
     </>

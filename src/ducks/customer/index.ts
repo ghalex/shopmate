@@ -22,6 +22,8 @@ const fetch = domain.effect<void, User | null, any>("fetch").use(() => {
   return api.customer.fetch();
 });
 
+const clearError = domain.event("clear error");
+
 // stores
 export const $current = domain.store<User | null>(null);
 export const $busy = domain.store(false);
@@ -48,7 +50,8 @@ $error
   .on(signup.fail, (state, { error }) => {
     const json = JSON.parse(error.message).error;
     return json.message as string;
-  });
+  })
+  .reset(clearError);
 
 // exports
 export default {
@@ -58,5 +61,6 @@ export default {
   login,
   signup,
   logout,
-  fetch
+  fetch,
+  clearError
 };
