@@ -24,7 +24,7 @@
     "effector-react": "^20.0.5",
     "form-hooks": "^0.6.0",
     "history": "^4.9.0",
-    "immer": "^3.1.3",
+    "immer": "^9.0.6",
     "lodash": "^4.17.14",
     "material-ui-flat-pagination": "^3.2.0",
     "react": "^16.8.5",
